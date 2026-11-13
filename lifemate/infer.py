@@ -45,6 +45,7 @@ def main():
     ap.add_argument("--backend", default="vllm", choices=["vllm", "hf"])
     ap.add_argument("--dtype", default="bfloat16")
     ap.add_argument("--asr-dtype", default="float16")
+    ap.add_argument("--asr-beams", type=int, default=1, help="num_beams của Whisper (1 = greedy)")
     ap.add_argument("--gpu-mem", type=float, default=0.70, help="vLLM share of GPU memory; the rest holds Whisper")
     ap.add_argument("--time-budget", type=float, default=24.0, help="seconds per sample for the agent loop")
     ap.add_argument("--limit", type=int)
@@ -100,7 +101,7 @@ def main():
             env = ToolEnv(split, it["id"], root=root)  # exactly one env per sample
             try:
                 clips = clips_of(it)
-                texts = transcribe_all(pipe, [load_wav(root / split / p) for p, _ in clips])
+                texts = transcribe_all(pipe, [load_wav(root / split / p) for p, _ in clips], beams=a.asr_beams)
                 table = {p: t for (p, _), t in zip(clips, texts)}
                 tr["asr"] = texts
 

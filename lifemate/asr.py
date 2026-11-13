@@ -72,8 +72,8 @@ def looks_bad(text: str) -> bool:
     return len(w) >= 8 and max(w.count(x) for x in set(w)) / len(w) > 0.5
 
 
-def transcribe_all(pipe, wavs: list) -> list[str]:
-    kw = {"num_beams": 1, "do_sample": False}
+def transcribe_all(pipe, wavs: list, beams: int = 1) -> list[str]:
+    kw = {"num_beams": beams, "do_sample": False}  # beam search vẫn tất định (không sampling)
     try:
         out = pipe([{"raw": w, "sampling_rate": 16000} for w in wavs],
                    generate_kwargs={**kw, "language": "vi", "task": "transcribe"})
@@ -103,6 +103,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--dtype", default="float16")
+    ap.add_argument("--beams", type=int, default=1, help="num_beams khi giải mã (1 = greedy như các bản trước)")
     a = ap.parse_args()
     root = Path(a.root)
     items = [json.loads(l) for l in open(root / a.split / f"{a.split}.jsonl", encoding="utf-8") if l.strip()]
@@ -120,7 +121,7 @@ def main():
     res, t0, chunk = {}, time.time(), 256
     for i in range(0, len(clips), chunk):
         part = clips[i: i + chunk]
-        texts = transcribe_all(pipe, [load_wav(root / a.split / p) for p in part])
+        texts = transcribe_all(pipe, [load_wav(root / a.split / p) for p in part], beams=a.beams)
         res.update(zip(part, texts))
         print(f"  {min(i + chunk, len(clips))}/{len(clips)}  {time.time() - t0:.0f}s", flush=True)
     sec = time.time() - t0

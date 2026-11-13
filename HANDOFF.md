@@ -311,3 +311,10 @@ Tổng tham số: Qwen3-4B 4.02B + Whisper large-v3 1.55B = **5.57B < 6B**; LLM 
 Docker: làm theo `VAST_GUIDE.md`, **bắt buộc Bước 5b** (`--gpu-mem 0.62`, đo max giây/mẫu).
 Dự phòng nếu large-v3 không đạt thời gian/bộ nhớ trong Docker: `ft_v11_all_adapter` + `asr_ft_v4` (chưa đo public; ước 50–51),
 cuối cùng là `ft_v11_adapter` + `asr_ft_v4` (49.53, đã chứng minh trên Colab).
+
+## 16. Beam search cho ASR (13/11 tối, không cần train, chạy được trên L4)
+
+Bản cuối giải mã Whisper **greedy**. Đã thêm `--beams` (`lifemate/asr.py`) và `--asr-beams` (`lifemate/infer.py`, Docker); mặc định 1 =
+greedy nên mọi bản cũ tái hiện y nguyên. Notebook `colab/zaic_beam_colab.ipynb` (L4): đo WER val với `asr_v8_large_holdout`
+ở beam 1/3/5 (greedy = 10.08%), nếu beam tốt nhất giảm ≥ 0.3 điểm WER thì chạy public với hệ thống cuối + beam đó.
+Nếu public > 52.10: Docker thêm `"--asr-beams", "<B>"` vào `CMD`, và đo lại max giây/mẫu (beam chậm hơn greedy).

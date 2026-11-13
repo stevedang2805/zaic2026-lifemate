@@ -49,6 +49,7 @@ Chi tiết mọi thí nghiệm, lý do thắng/thua, số liệu: **`HANDOFF.md`
 
 ## Hướng làm tiếp (xếp theo kỳ vọng)
 
+0. **Beam search cho Whisper** (không train, L4): `colab/zaic_beam_colab.ipynb` — xem `HANDOFF.md` mục 16.
 1. **Thêm ~300 spec phủ rộng** cho các app/tool đang ít mẫu, cùng kiểu `synth_specs_claude/` (generator: `tools/synth_v9/`). Kiểm tra bằng simulator: `python -m lifemate.synth_build --root DATA --tools-from public_test --specs "<glob>" --split synth_x` (phải 0 reject). Train bằng `colab/zaic_final_llm_colab.ipynb` sau khi thêm glob.
 2. **Audio TTS** cho từ vựng app mới (tên hàng, ga tàu, mã cổ phiếu) để fine-tune ASR.
 3. **Cho LLM lập kế hoạch/suy nghĩ ngắn trước khi gọi tool** (phải giữ ≤ 30 s/mẫu trên A30).
@@ -63,7 +64,8 @@ synth_specs/         gen_*.jsonl (440, sinh bằng code) + llm_*.jsonl (320, vi�
 synth_specs_claude/  285 spec viết từ catalog
 tools/synth_v9/      generator của synth_specs_claude (mỗi kịch bản là code: lời nói, state, gold) — dùng để viết thêm spec
 splits/              val_unseen (193, 6 app giữ lại) / val_seen (135) / train_fit (957)
-colab/               zaic_final_llm_colab (LLM cuối), zaic_final_asr_colab (ASR cuối), zaic_v11_colab (LLM trên train_fit, đo được val)
+colab/               zaic_final_llm_colab (LLM cuối), zaic_final_asr_colab (ASR cuối), zaic_v11_colab (LLM trên train_fit, đo được val),
+                     zaic_beam_colab (thử beam search ASR, L4)
 docker/              Dockerfile (vllm/vllm-openai:v0.33.0), build_and_test.sh (3 PASS: đủ dòng, schema, tất định)
 VAST_GUIDE.md        dựng + test + nộp Docker trên Vast.ai từng bước (Bước 5b cho large-v3)
 HANDOFF.md           toàn bộ lịch sử, quyết định, số liệu
