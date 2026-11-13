@@ -1,0 +1,26 @@
+# dữ liệu BTC và mọi thứ sinh ra từ nó — KHÔNG commit (luật: không chia sẻ dữ liệu ra ngoài đội)
+data/
+data_raw/
+*.wav
+train+public_test.zip
+asr_public.json
+asr_val.json
+asr_train_oof.json
+submission*.jsonl
+traces*.jsonl
+# model và output chạy
+models/
+adapter/
+runs/
+result/
+result1/
+result2/
+ft_*/
+asr_ft*/
+*.safetensors
+*.bin
+*.tar.gz
+*.zip
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

@@ -1,0 +1,38 @@
+examples 2794 (skipped 0) tokens 15488910 supervised 221516
+step 5/175 loss 1.0431 lr 1.00e-04 elapsed 2.6m eta 89.4m
+step 10/175 loss 0.2412 lr 9.98e-05 elapsed 5.6m eta 91.7m
+step 15/175 loss 0.1114 lr 9.91e-05 elapsed 7.9m eta 84.4m
+step 20/175 loss 0.1146 lr 9.81e-05 elapsed 10.6m eta 82.0m
+step 25/175 loss 0.0761 lr 9.66e-05 elapsed 13.1m eta 78.4m
+step 30/175 loss 0.0981 lr 9.48e-05 elapsed 15.8m eta 76.6m
+step 35/175 loss 0.1045 lr 9.25e-05 elapsed 18.7m eta 74.8m
+step 40/175 loss 0.0510 lr 8.99e-05 elapsed 21.2m eta 71.7m
+step 45/175 loss 0.0587 lr 8.70e-05 elapsed 23.8m eta 68.8m
+step 50/175 loss 0.0437 lr 8.37e-05 elapsed 26.1m eta 65.2m
+step 55/175 loss 0.0565 lr 8.01e-05 elapsed 28.6m eta 62.4m
+step 60/175 loss 0.0528 lr 7.63e-05 elapsed 31.4m eta 60.1m
+step 65/175 loss 0.0518 lr 7.23e-05 elapsed 34.1m eta 57.8m
+step 70/175 loss 0.0384 lr 6.81e-05 elapsed 36.6m eta 54.9m
+step 75/175 loss 0.0430 lr 6.37e-05 elapsed 39.2m eta 52.2m
+step 80/175 loss 0.0617 lr 5.92e-05 elapsed 41.9m eta 49.8m
+step 85/175 loss 0.0388 lr 5.46e-05 elapsed 44.6m eta 47.2m
+step 90/175 loss 0.0388 lr 5.00e-05 elapsed 47.2m eta 44.6m
+step 95/175 loss 0.0396 lr 4.54e-05 elapsed 49.8m eta 42.0m
+step 100/175 loss 0.0333 lr 4.08e-05 elapsed 52.4m eta 39.3m
+step 105/175 loss 0.0286 lr 3.63e-05 elapsed 55.0m eta 36.6m
+step 110/175 loss 0.0374 lr 3.19e-05 elapsed 57.5m eta 34.0m
+step 115/175 loss 0.0248 lr 2.77e-05 elapsed 60.2m eta 31.4m
+step 120/175 loss 0.0494 lr 2.37e-05 elapsed 62.8m eta 28.8m
+step 125/175 loss 0.0247 lr 1.99e-05 elapsed 65.3m eta 26.1m
+step 130/175 loss 0.0322 lr 1.63e-05 elapsed 67.8m eta 23.5m
+step 135/175 loss 0.0298 lr 1.30e-05 elapsed 70.5m eta 20.9m
+step 140/175 loss 0.0286 lr 1.01e-05 elapsed 73.0m eta 18.3m
+step 145/175 loss 0.0245 lr 7.49e-06 elapsed 75.7m eta 15.7m
+step 150/175 loss 0.0345 lr 5.24e-06 elapsed 78.2m eta 13.0m
+step 155/175 loss 0.0281 lr 3.38e-06 elapsed 80.9m eta 10.4m
+step 160/175 loss 0.0322 lr 1.91e-06 elapsed 83.9m eta 7.9m
+step 165/175 loss 0.0246 lr 8.51e-07 elapsed 86.6m eta 5.2m
+step 170/175 loss 0.0355 lr 2.13e-07 elapsed 89.2m eta 2.6m
+step 175/175 loss 0.0284 lr 0.00e+00 elapsed 91.5m eta 0.0m
+saved adapter -> /content/ft_v6/adapter  (91.5 min)
+saved merged model -> /content/ft_v6/merged

@@ -1,0 +1,3 @@
+samples 193  score 25.27
+  act           n= 166  mean=27.43
+  ask_missing   n=  27  mean=11.93

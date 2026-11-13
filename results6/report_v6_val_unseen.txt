@@ -1,0 +1,128 @@
+samples 193  score 35.96   (points lost per category, out of 100)
+  state:wrong_write_args       n=  39  lost=20.21
+  no_call_but_gold_acts        n=  27  lost=13.99
+  state:missing_write          n=  24  lost=12.44
+  f1:extra_and_missing_calls   n=  29  lost= 8.36
+  state:extra_write            n=  16  lost= 8.29
+  f1:extra_calls               n=   4  lost= 0.69
+  f1:missing_calls             n=   1  lost= 0.07
+tools with wrong write args: [('appliances.start_cycle', 9), ('reminders.create', 5), ('calendar.create_event', 5), ('learning.log_progress', 4), ('flights.book', 3), ('library.reserve', 3), ('loyalty.redeem', 3), ('learning.schedule_lesson', 3), ('learning.enroll', 2), ('notes.create', 2)]
+
+== no_call_but_gold_acts
+- train_0441: Thế thì em đăng ký luôn cho chị khoá đấy nhé.
+    gold: [{"name": "learning.enroll", "arguments": {"course_id": "course_04"}}]
+    pred: []
+- train_0478: Chạy máy rửa bát chế độ thường giúp em nha, rồi giao cho Minh vụ cất bát sạch lát nữa luôn.
+    gold: [{"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_02", "cycle": "normal"}}, {"name": "household_chores.list_chores", "arguments": {}}, {"name": "household_chores.assign", "arguments": {"chore_id": "chore_05", "assignee": "Minh"}}]
+    pred: []
+- train_0828: Ơ bạn ơi, thứ sáu này hẹn bưu điện qua số 18 phố Trúc Bạch lấy gói hàng giúp mình nha. Với cả sáu giờ chiều hôm trước nh
+    gold: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "18 phố Trúc Bạch", "date": "2026-10-09"}}, {"name": "reminders.create", "arguments": {"content": "In nhãn dán gói hàng", "time": "2026-10-08T18:00:00+07:00"}}]
+    pred: []
+- train_0983: Giữ cuốn nớ, à thôi khỏi. Ghi việc cần làm: qua thư viện mượn hai cuốn, nếu Nhà giả kim còn.
+    gold: [{"name": "library.search", "arguments": {"query": "Nhà giả kim"}}, {"name": "tasks.add", "arguments": {"title": "Ghé thư viện mượn Đắc nhân tâm và Nhà giả kim"}}]
+    pred: []
+- train_0986: Ờ, mấy bài hồi nãy đó, ghi số phút vô từng khoá luôn giùm anh, trưa ế khách anh ngồi học.
+    gold: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.log_progress", "arguments": {"course_id": "course_9392", "minutes": 40}}, {"name": "learning.log_progress", "arguments": {"course_id": "course_8774", "minutes": 25}}]
+    pred: []
+- train_1026: Bữa nay anh chạy xe tới tối mịt, coi có hàng nào tới nhà thì đổi qua bữa khác cho anh, lẹ nha.
+    gold: [{"name": "package_tracking.track", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "package_tracking.reschedule_delivery", "params": ["time"]}}]
+    pred: []
+
+== f1:extra_calls
+- train_0452: Ừ, thế đặt bưu tá qua đấy lấy hàng đúng hôm đó cho anh nhé.
+    gold: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "25 Nguyễn Du", "date": "2026-09-27"}}]
+    pred: [{"name": "package_tracking.track", "arguments": {}}, {"name": "package_tracking.schedule_pickup", "arguments": {"address": "25 Nguyễn Du", "date": "2026-09-27"}}]
+- train_0520: Vậy hẹn bưu tá qua đó lấy hàng đúng hôm ấy giúp mình nha.
+    gold: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "17 phố Lò Đúc", "date": "2026-09-29"}}]
+    pred: [{"name": "package_tracking.track", "arguments": {}}, {"name": "package_tracking.schedule_pickup", "arguments": {"address": "17 phố Lò Đúc", "date": "2026-09-29"}}]
+- train_0589: Có, em hẹn người qua lấy đúng hôm đấy cho chị nhé.
+    gold: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "25 phố Lò Đúc", "date": "2026-09-29"}}]
+    pred: [{"name": "package_tracking.track", "arguments": {}}, {"name": "package_tracking.schedule_pickup", "arguments": {"address": "25 phố Lò Đúc", "date": "2026-09-29"}}]
+- train_1252: Còn điểm hãng bay đó, đổi cái phiếu giảm tiền vé liền giùm tôi nghen.
+    gold: [{"name": "loyalty.get_points", "arguments": {}}, {"name": "loyalty.redeem", "arguments": {"program": "prog_297", "reward_id": "rw_01_2"}}]
+    pred: [{"name": "loyalty.list_vouchers", "arguments": {}}, {"name": "loyalty.redeem", "arguments": {"program": "loyalty", "reward_id": "vch_908"}}, {"name": "loyalty.get_points", "arguments": {}}, {"name": "loyalty.redeem", "arguments": {"program": "prog_297", "reward_id": "rw_01_2"}}]
+
+== state:wrong_write_args
+- train_0486: Ừ, thế cho nó chạy giặt nhanh luôn đi bạn.
+    gold: [{"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_06", "cycle": "quick"}}]
+    pred: [{"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_06", "cycle": "quick", "delay_minutes": 30}}]
+- train_0615: Đăng ký cho em khóa Sơ cứu gia đình nha, xong thêm buổi khai giảng lúc bảy giờ tối thứ hai, mùng năm tháng mười vào lịch
+    gold: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.enroll", "arguments": {"course_id": "course_04"}}, {"name": "calendar.create_event", "arguments": {"title": "Khai giảng sơ cứu", "start": "2026-10-05T19:00:00+07:00", "end": "2026-10-05T20:00:00+07:00"}}]
+    pred: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.enroll", "arguments": {"course_id": "course_04"}}, {"name": "learning.schedule_lesson", "arguments": {"course_id": "course_04", "time": "2026-10-05T19:00:00+07:00"}}]
+- train_0618: Tôi vừa cho bộ đồ thể thao vào máy giặt rồi, bật chế độ giặt nhanh giúp tôi, rồi mười giờ mười lăm nhắc tôi ra lấy đồ nh
+    gold: [{"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_01", "cycle": "quick"}}, {"name": "reminders.create", "arguments": {"content": "Lấy đồ thể thao ra khỏi máy giặt", "time": "2026-10-01T10:15:00+07:00"}}]
+    pred: [{"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_01", "cycle": "eco"}}, {"name": "reminders.list", "arguments": {}}, {"name": "reminders.create", "arguments": {"content": "ra lấy đồ", "time": "2026-10-01T10:15:00+07:00"}}]
+- train_0639: Thế bật giặt nhanh bộ đồ thể thao luôn bây giờ đi em, rồi chín giờ năm mươi nhắc anh ra lấy đồ đem phơi nhé.
+    gold: [{"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_01", "cycle": "quick"}}, {"name": "reminders.create", "arguments": {"content": "Lấy đồ thể thao ra phơi", "time": "2026-10-01T09:50:00+07:00"}}]
+    pred: [{"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_01", "cycle": "quick"}}, {"name": "reminders.create", "arguments": {"content": "ra lấy đồ giặt", "time": "2026-10-01T09:55:00+07:00"}}]
+- train_0779: Rồi, giờ xem hôm nay nhà dùng hết bao nhiêu điện rồi, còn đủ thì chạy máy theo đúng như mình dặn nha, xong ghi chú lại đ
+    gold: [{"name": "home_energy.get_usage", "arguments": {"period": "today"}}, {"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_04", "cycle": "quick"}}, {"name": "notes.create", "arguments": {"title": "Ngân sách điện hôm nay", "content": "Hô
+    pred: [{"name": "home_energy.get_usage", "arguments": {"period": "today"}}, {"name": "appliances.list", "arguments": {}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_04", "cycle": "quick"}}, {"name": "appliances.start_cycle", "arguments": {"appliance_id": "appl_01", "cycle": "qu
+- train_0782: Giờ kiểm tra lại giùm em cửa đó đi, còn mở thì nhắn chị Mai một tiếng nha, đóng rồi thì thôi.
+    gold: [{"name": "door_lock.list_locks", "arguments": {}}, {"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id": "chat_01", "content": "Chị Mai ơi, cửa ban công phòng khách vẫn đang mở, chị đóng giúp em nhé."}}]
+    pred: [{"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_02", "locked": false}}]
+
+== state:missing_write
+- train_0488: Dạ thôi lấy cuốn Dòng sông mùa hạ đi ạ.
+    gold: [{"name": "library.search", "arguments": {"query": "Dòng sông mùa hạ"}}, {"name": "library.reserve", "arguments": {"book_id": "book_05"}}]
+    pred: [{"name": "library.search", "arguments": {"query": "Dòng sông quà"}}]
+- train_0607: Đặt mượn cho tôi cuốn Cẩm nang sơ cứu, cái bản in chữ to ấy nhé, chữ nhỏ đọc mỏi mắt lắm.
+    gold: [{"name": "library.search", "arguments": {"query": "Cẩm nang sơ cứu"}}, {"name": "library.reserve", "arguments": {"book_id": "book_07"}}]
+    pred: [{"name": "library.search", "arguments": {"query": "Cẩm năng xe"}}]
+- train_0626: Ừ đúng rồi, em đặt giữ giúp chị cuốn đấy nhé.
+    gold: [{"name": "library.search", "arguments": {"query": "Người gieo hạt"}}, {"name": "library.reserve", "arguments": {"book_id": "book_07"}}]
+    pred: [{"name": "library.search", "arguments": {"query": "Ngày giao hẹn về"}}]
+- train_0794: Vậy nếu cửa đó giờ vẫn còn mở khóa thì khóa lại giúp chị, đánh dấu cái cảnh báo ấy là xử lý rồi, xong gọi cho anh Toàn t
+    gold: [{"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_04", "locked": true}}, {"name": "home_security.acknowledge_alert", "arguments": {"alert_id": "alert_04"}}, {"name": "contacts.search", "arguments": {"query": "Toàn"}}, {"name": "phone.ca
+    pred: [{"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_04", "locked": true}}, {"name": "home_security.acknowledge_alert", "arguments": {"alert_id": "alert_04"}}, {"name": "contacts.search", "arguments": {"query": "Anh Toàn"}}, {"name": "sys.
+- train_0835: Ừ đặt đi em, xong ghi vào lịch hai giờ chiều hôm đó là bưu tá qua lấy hàng, anh hẹn họ giờ đấy rồi.
+    gold: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "25 Lý Thường Kiệt", "date": "2026-10-16"}}, {"name": "calendar.create_event", "arguments": {"title": "Bưu tá qua lấy hàng", "start": "2026-10-16T14:00:00+07:00", "end": "2026-10-16T15:00:00+07:00"}}]
+    pred: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "25 Lý Thường Kiệt", "date": "2026-10-16"}}]
+- train_0872: Em gọi giúp tôi số không chín không một, hai ba bốn, năm sáu bảy bảy nhé, rồi đặt bưu tá mai qua 12 phố Hoa lấy bộ hồ sơ
+    gold: [{"name": "phone.call", "arguments": {"phone_number": "09012345677"}}, {"name": "package_tracking.schedule_pickup", "arguments": {"address": "12 phố Hoa", "date": "2026-09-21"}}]
+    pred: [{"name": "phone.call", "arguments": {"phone_number": "09012345677"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "package_tracking.schedule_pickup", "params": ["address"]}}]
+
+== f1:extra_and_missing_calls
+- train_0504: Xem giùm anh cảnh báo cửa gara nó báo gì, nếu cửa đang mở thì khóa lại rồi nhắn cho Minh là gara khóa rồi nhé.
+    gold: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_04", "locked": true}}, {"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id"
+    pred: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_04", "locked": true}}, {"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id"
+- train_0571: Trợ lý ơi xem giúp em cảnh báo ở gara báo gì với, nếu cửa gara còn đang mở thì khóa lại luôn, rồi nhắn anh Sơn là gara k
+    gold: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_05", "locked": true}}, {"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id"
+    pred: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_05", "locked": true}}, {"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id"
+- train_0614: Giữ giúp tôi cuốn Phương pháp nghiên cứu định tính ở thư viện, rồi năm giờ chiều thứ bảy này nhắc tôi qua lấy sách nhé.
+    gold: [{"name": "library.search", "arguments": {"query": "Phương pháp nghiên cứu định tính"}}, {"name": "library.reserve", "arguments": {"book_id": "book_07"}}, {"name": "reminders.create", "arguments": {"content": "Đến nhận sách Phương pháp nghiên cứu định tính", "time": "2026-10-03T17:00:00+07:00"}}]
+    pred: [{"name": "library.search", "arguments": {"query": "Phương pháp nghiên cứu định tính"}}, {"name": "library.reserve", "arguments": {"book_id": "book_07"}}, {"name": "reminders.create", "arguments": {"content": "qua lấy sách", "time": "2026-10-03T17:00:00+07:00"}}]
+- train_0697: Em ơi đăng ký cho chị khóa sơ cứu cộng đồng cơ bản nhé. Buổi đầu tám giờ sáng thứ hai tuần sau, em tạo một sự kiện trong
+    gold: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.enroll", "arguments": {"course_id": "course_05"}}, {"name": "calendar.create_event", "arguments": {"title": "Buổi đầu khóa sơ cứu", "start": "2026-10-05T08:00:00+07:00", "end": "2026-10-05T09:00:00+07:00"}}, {"name": "reminders.
+    pred: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.enroll", "arguments": {"course_id": "course_05"}}, {"name": "calendar.create_event", "arguments": {"title": "Sơ cứu cộng đồng cơ bản", "start": "2026-10-05T08:00:00+07:00", "end": "2026-10-05T09:00:00+07:00"}}, {"name": "reminde
+- train_0745: Xem giúp anh có cảnh báo gì ở cổng phụ không, rồi khóa cái cổng phụ phía sân lại, xong ghi chú cho anh tiêu đề là xử lý 
+    gold: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_04", "locked": true}}, {"name": "notes.create", "arguments": {"title": "Xử lý cảnh báo cổng phụ", "content": "Đã kiểm tra cảnh báo
+    pred: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_04", "locked": true}}, {"name": "notes.create", "arguments": {"title": "Dẫn lý báo cổng phụ", "content": "Kiểm tra cảnh báo và kho
+- train_0783: Ừ, em đăng ký luôn cho tôi khoá đấy nhé, rồi ghi buổi khai giảng vào lịch, với đặt cái nhắc chuẩn bị hôm trước như tôi v
+    gold: [{"name": "learning.enroll", "arguments": {"course_id": "course_04"}}, {"name": "calendar.create_event", "arguments": {"title": "Khai giảng khoá Kể chuyện bằng dữ liệu", "start": "2026-10-20T19:00:00+07:00", "end": "2026-10-20T20:00:00+07:00"}}, {"name": "reminders.create", "arguments": {"content": 
+    pred: [{"name": "learning.enroll", "arguments": {"course_id": "course_04"}}, {"name": "calendar.create_event", "arguments": {"title": "Xe giải ngoài", "start": "2026-10-20T19:00:00+07:00", "end": "2026-10-20T20:00:00+07:00"}}, {"name": "reminders.create", "arguments": {"content": "Chuẩn bị cho buổi xe giả
+
+== f1:missing_calls
+- train_0664: Xem hộ tôi có cảnh báo gì ở cửa kho phụ không, nếu báo là cửa đang mở thì khóa ngay lại, xong gọi cho số trực 0988999000
+    gold: [{"name": "home_security.list_alerts", "arguments": {}}, {"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_06", "locked": true}}, {"name": "phone.call", "arguments": {"phone_number": "09889990002"}}]
+    pred: [{"name": "door_lock.list_locks", "arguments": {}}, {"name": "door_lock.set_lock", "arguments": {"lock_id": "lock_06", "locked": true}}, {"name": "phone.call", "arguments": {"phone_number": "09889990002"}}]
+
+== state:extra_write
+- train_0931: Đặt báo thức, à không, đặt cho tôi buổi học ngoại ngữ tôi đang theo, bảy giờ sáng mai nghen.
+    gold: [{"name": "learning.list_courses", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "learning.schedule_lesson", "params": ["course_id"]}}]
+    pred: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.schedule_lesson", "arguments": {"course_id": "course_353", "time": "2026-11-03T07:00:00+07:00"}}]
+- train_0944: Rứa nhắn mạ là em tắt rồi nghe, à khoan, chưa nhắn mô, tắt cái máy dưới bếp trước đã.
+    gold: [{"name": "appliances.list", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "appliances.stop", "params": ["appliance_id"]}}]
+    pred: [{"name": "smart_home.get_status", "arguments": {}}, {"name": "smart_home.light_set", "arguments": {"device_id": "light_kitchen", "power": "off"}}, {"name": "sms.send", "arguments": {"contact_id": "c_97", "content": "Mạ ơi, em tắt cái máy bếp rồi"}}]
+- train_1107: Thế em đặt trước cho chị một cuốn của ông ấy nhé, mai chị qua thư viện lấy luôn.
+    gold: [{"name": "sys.ask_missing_info", "arguments": {"tool_name": "library.reserve", "params": ["book_id"]}}]
+    pred: [{"name": "library.reserve", "arguments": {"book_id": "book_5170"}}]
+- train_1139: Ừ, thế ghi cho tôi đủ buổi ấy vào khoá... khoá tiếng gì nhỉ, tôi quên mất rồi.
+    gold: [{"name": "learning.list_courses", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "learning.log_progress", "params": ["course_id"]}}]
+    pred: [{"name": "learning.list_courses", "arguments": {}}, {"name": "learning.schedule_lesson", "arguments": {"course_id": "course_763", "time": "2026-10-20T07:00:00+07:00"}}]
+- train_1210: Đổi điểm MinhPoint lấy voucher MinhMart cho chị, mai chị đi siêu thị.
+    gold: [{"name": "loyalty.get_points", "arguments": {"program": "MinhPoint"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "loyalty.redeem", "params": ["reward_id"]}}]
+    pred: [{"name": "loyalty.get_points", "arguments": {}}, {"name": "loyalty.redeem", "arguments": {"program": "MinhPoint", "reward_id": "rw_01_1"}}]
+- train_1282: Hai kiện thứ tư đó hẹn giao lại bữa khác nha con, thứ tư cô đi Bình Tây lấy hàng cả ngày rồi.
+    gold: [{"name": "sys.ask_missing_info", "arguments": {"tool_name": "package_tracking.reschedule_delivery", "params": ["time"]}}]
+    pred: [{"name": "package_tracking.schedule_pickup", "arguments": {"address": "203 Lê Văn Sỹ, Quận 3, TP.HCM", "date": "2026-10-14"}}]

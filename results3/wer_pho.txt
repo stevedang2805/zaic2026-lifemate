@@ -1,0 +1,34 @@
+model=vinai/PhoWhisper-large clips=1100 seconds=225 (0.204s/clip, batch 16)
+WER=25.77% CER=17.15% (n=1100 clips, raw text, digits not normalised)
+spoken digit strings recovered exactly: 6/10
+worst clips:
+  GOLD: Chuyển kênh VTV3 giúp tôi.
+  ASR : chính thêm về thời đại yếu thọ.
+  GOLD: Thế còn giá xăng RON95?
+  ASR : thể còn dạ sang loan chữ lắm.
+  GOLD: Bật tivi lên kênh HTV7 nhé.
+  ASR : bạch ti vi lên kênh hết ti vi bảy nhé.
+  GOLD: Tắt đèn phòng làm việc giúp chị.
+  ASR : tay điền phòng làm việc liếp xe khi hạn nạp.
+  GOLD: Chuyển tivi sang HTV7 nha.
+  ASR : khiển ti vi sang htv bảy nha.
+  GOLD: Em coi giùm chị mấy chuyến bay công tác chị đặt rồi.
+  ASR : em có dùng chi mấy cái chuyện bẫy cõng tạ chi đắt rồi đó.
+  GOLD: Xăng RON95 bữa nay lên tới bao nhiêu rồi?
+  ASR : sang rong chín lăm bộ này lên thế bao nhiêu.
+  GOLD: Vậy tối mai anh có lịch gì hông?
+  ASR : vậy thôi mà ăn cái là chịu.
+  GOLD: Ừ, còn ví cô còn bao nhiêu tiền?
+  ASR : ờ không biết cô gọi mày như thế.
+  GOLD: Em thêm việc gửi báo giá cước cho Mr. Tanaka, hạn năm giờ chiều nay nghe.
+  ASR : em thấy việc người bạo dạ cướp cho mị tơ tá na cá hàng nắm giờ chiêu nấy nghe.
+  GOLD: Chuyển qua lau... à thôi khỏi, dừng hẳn cho nó về sạc đi em.
+  ASR : những con lao ở đó khó dường hãi cho nó sinh về sạch lệ.
+  GOLD: Đặt Le Petit Bakery sáu cái croissant bơ giao về homestay cho anh.
+  ASR : đã lia thích bà cary sáu cái có sò bơ dẻo về hẳn tay chân.
+  GOLD: Ví của chị còn bao nhiêu?
+  ASR : phí uống trị còn mạnh nhiều.
+  GOLD: Bật tivi kênh S+ Sport đi.
+  ASR : bật ti vi kênh s cộng sứt bọt đi.
+  GOLD: Kêu xe ôm thì nhiêu tiền?
+  ASR : chơi xe hầm thấy nhiều tiện.

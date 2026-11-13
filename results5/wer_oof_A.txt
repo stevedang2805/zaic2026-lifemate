@@ -1,0 +1,34 @@
+model=/content/asr_foldB clips=2493 seconds=112 (0.045s/clip, batch 16)
+WER=11.29% CER=7.77% (n=2493 clips, raw text, digits not normalised)
+spoken digit strings recovered exactly: 13/20
+worst clips:
+  GOLD: Ừ, cảm ơn nha.
+  ASR : Ừ, mưa nghe em.
+  GOLD: Ừ. Còn Góc Phố 24h nhiêu điểm?
+  ASR : Ờ, còn góc phố hai mươi bốn giờ nhiêu điểm?
+  GOLD: Thôi chị lái xe về, mở VOV Giao thông đi.
+  ASR : Coi chị lái CV, mở vô ô vô.
+  GOLD: Xe tui bình bốn lít, đổ đầy E5 hết nhiêu?
+  ASR : Xe tui bình bóng lít trời đủ đài em nào hết bao nhiêu?
+  GOLD: Em, thư viện còn cuốn Đắc nhân tâm không?
+  ASR : Em, tôi gọi còn khoảng đá Nhanh Tổng không?
+  GOLD: Ơ tuần này mình có hẹn gì bên Oakwood Residence hông ta?
+  ASR : Ơ, tuần này mình có hẹn như Bernard Ockwood với Chủ đài Nông ca?
+  GOLD: Dầu diesel thì nhiêu, ba tui chạy xe tải.
+  ASR : Dạo đi Ezen thì bao nhiêu ba tôi chạy xe tả?
+  GOLD: Vậy cho nó dọn chỗ đó luôn bây giờ đi em.
+  ASR : Vậy tránh bò giòn trời đổi bốn bây giờ đi.
+  GOLD: Vàng SJC bữa nay nhiêu một lượng em?
+  ASR : Vâng SJC bữa ni tuần mô một lượng rả em.
+  GOLD: Nay thấy thế nào, có khỏe không đó?
+  ASR : Này thấy linh đào, có khoẻ không á?
+  GOLD: Khách Hàn cứ hỏi đội bóng Đà Nẵng dạo ni đá ra răng, em tra thử bên bóng đá cho anh coi với.
+  ASR : Cái thằng cứ hỏi đọc bán hình ảnh dạo ni đó, lần lần, em thử bán đó giúp anh coi với.
+  GOLD: Mai 8 giờ tối nhắc anh lấy đồ giặt nha.
+  ASR : Mai tám giờ tôi nhắc anh ấy lấy nồi dậy.
+  GOLD: Rứa mở VOV Giao thông trước đã, đang chạy xe.
+  ASR : Rứa mở vô ghi dần, hôm nay anh chạy xe.
+  GOLD: Ok, khoá lại đi em.
+  ASR : Ok khoá là điện.
+  GOLD: Còn đi bộ thì răng?
+  ASR : Chi bộ thì rứa.

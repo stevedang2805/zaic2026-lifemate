@@ -1,0 +1,34 @@
+model=/content/asr_foldA clips=2543 seconds=105 (0.041s/clip, batch 16)
+WER=11.87% CER=8.30% (n=2543 clips, raw text, digits not normalised)
+spoken digit strings recovered exactly: 17/21
+worst clips:
+  GOLD: Hương đổi số rồi, sửa thành 09351708362 nhé.
+  ASR : Hương đổi số rồi, sửa thành không chín ba năm một bảy, không tám ba sáu hai nhé.
+  GOLD: Ok, thanks em nha.
+  ASR : Ok, thật ra sáng mai nha.
+  GOLD: Trong ví chị còn được bao nhiêu?
+  ASR : Trong vị trí còn được cả từng mô tiền?
+  GOLD: Tắt đèn dưới bếp giúp chị.
+  ASR : Tắt đèn để cái bếp cho chi với.
+  GOLD: Chào buổi sáng nhé, dạo này vẫn khoẻ chứ?
+  ASR : Chào bạn soý nhé, trời nào muốn gửi ấy chứ?
+  GOLD: Ừ, cái kiểm kê đấy tôi phải dời đi.
+  ASR : Ừ, các em kệ lại tốt bảy giờ đi.
+  GOLD: Vé anh số 412750, dò giùm coi có trúng chi không.
+  ASR : Vé anh số bốn một hai bảy năm không, giờ giùm anh có trúng chi không?
+  GOLD: Em đọc giúp anh tin Zalo Kevin Walsh nhắn chiều nay.
+  ASR : Thêm tôi chúc anh tin giao lưu kênh VinQuest đến chiều nay.
+  GOLD: Tạo thêm cuộc họp với Lucas bảy giờ tối mai nghe em.
+  ASR : Tội thêm cuộn hộp phơi lookout, ba giờ tối nay nghe.
+  GOLD: Máy giặt thì giặt đồ dày.
+  ASR : Mấy giặt đồ thì giặt dài.
+  GOLD: Huy nhắn Zalo gì đó, đọc tui nghe coi.
+  ASR : Hu nhắn hình chi Zalo đó đặt cho tui nghe coi.
+  GOLD: Trợ lý giỏi quá, em khen thật lòng.
+  ASR : Trợ lý dẫu bát em kém tập mình.
+  GOLD: Thứ sáu này tui có lịch gì không?
+  ASR : Thế sáng nào tôi có lịch gì hông?
+  GOLD: Haha, em nói chuẩn đó.
+  ASR : À à, em nói chuyện đó.
+  GOLD: Trưa rồi, có quán mô giao bún bò không?
+  ASR : Trưa rồi, cô có mấy bán bò bán bò không?

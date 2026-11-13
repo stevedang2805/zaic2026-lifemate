@@ -1,0 +1,128 @@
+samples 135  score 51.54   (points lost per category, out of 100)
+  state:wrong_write_args       n=  23  lost=17.04
+  no_call_but_gold_acts        n=  19  lost=14.07
+  f1:extra_and_missing_calls   n=  17  lost= 8.26
+  state:extra_write            n=   6  lost= 4.44
+  state:missing_write          n=   3  lost= 2.22
+  ask:missing                  n=   2  lost= 1.19
+  acted_on_out_of_scope        n=   1  lost= 0.74
+  f1:missing_calls             n=   2  lost= 0.40
+  f1:extra_calls               n=   1  lost= 0.11
+tools with wrong write args: [('reminders.create', 6), ('banking.transfer', 3), ('ride_hailing.book', 2), ('food_delivery.place_order', 2), ('subscriptions.cancel', 2), ('bill_payment.pay', 2), ('ewallet.topup_mobile', 1), ('ewallet.transfer', 1), ('calendar.update_event', 1), ('sms.send', 1)]
+
+== state:wrong_write_args
+- train_0003: Ơi, nạp giúp mình 50 nghìn điện thoại cho bác Ba với chuyển ví cho cô Mai số tiền điện tháng này nhé.
+    gold: [{"name": "bill_payment.list_bills", "arguments": {}}, {"name": "contacts.search", "arguments": {"query": "Bác Ba"}}, {"name": "ewallet.topup_mobile", "arguments": {"phone": "09919377320", "amount": 50000}}, {"name": "contacts.search", "arguments": {"query": "Cô giáo Mai"}}, {"name": "ewallet.transf
+    pred: [{"name": "contacts.search", "arguments": {"query": "Bác Ba"}}, {"name": "contacts.search", "arguments": {"query": "cô Mai"}}, {"name": "bill_payment.list_bills", "arguments": {}}, {"name": "ewallet.topup_mobile", "arguments": {"phone": "09919377320", "amount": 50000}}, {"name": "ewallet.transfer", 
+- train_0094: Mai nếu mưa thì dời lịch chạy bộ sáng mai muộn hai tiếng rồi nhắn SMS cho bố báo giờ mới, không mưa thì thôi.
+    gold: [{"name": "weather.get_forecast", "arguments": {"date": "2026-11-14"}}, {"name": "calendar.list_events", "arguments": {}}, {"name": "calendar.update_event", "arguments": {"event_id": "evt_01", "start": "2026-11-14T10:00:00+07:00", "end": "2026-11-14T11:00:00+07:00"}}, {"name": "contacts.search", "ar
+    pred: [{"name": "weather.get_forecast", "arguments": {"date": "2026-11-14"}}, {"name": "calendar.list_events", "arguments": {}}, {"name": "calendar.update_event", "arguments": {"event_id": "evt_01", "start": "2026-11-14T09:00:00+07:00", "end": "2026-11-14T10:00:00+07:00"}}, {"name": "contacts.search", "ar
+- train_0097: Nhắc tôi uống thuốc lúc 8 giờ kém 15 tối mai với.
+    gold: [{"name": "reminders.create", "arguments": {"content": "uống thuốc", "time": "2026-11-25T19:45:00+07:00"}}]
+    pred: [{"name": "reminders.create", "arguments": {"content": "uống thuốc", "time": "2026-11-25T20:59:00+07:00"}}]
+- train_0148: Trong vòng năm ngày tới hoá đơn nào tới hạn thì cứ dùng ngân hàng trả, còn hoá đơn nào vượt 500 nghìn thì chưa trả, để t
+    gold: [{"name": "bill_payment.list_bills", "arguments": {}}, {"name": "bill_payment.pay", "arguments": {"bill_id": "bill_02", "source": "bank"}}, {"name": "bill_payment.pay", "arguments": {"bill_id": "bill_03", "source": "bank"}}]
+    pred: [{"name": "bill_payment.list_bills", "arguments": {}}, {"name": "bill_payment.schedule_autopay", "arguments": {"type": "electricity", "enabled": true}}, {"name": "bill_payment.schedule_autopay", "arguments": {"type": "water", "enabled": true}}, {"name": "bill_payment.schedule_autopay", "arguments": 
+- train_0149: Chiều nay đặt ô tô bốn chỗ đón tôi ở công ty tới chỗ hẹn cà phê với gia đình, trước giờ hẹn 45 phút, nhắc tôi mang lapto
+    gold: [{"name": "calendar.list_events", "arguments": {}}, {"name": "ride_hailing.book", "arguments": {"pickup": "Tòa nhà Kim Cương, Nam Từ Liêm, Hà Nội", "dropoff": "Cà phê Phố Cổ, 11 Hàng Gai, Hoàn Kiếm, Hà Nội", "vehicle": "car4", "schedule_time": "2026-11-16T13:15:00+07:00"}}, {"name": "reminders.creat
+    pred: [{"name": "calendar.list_events", "arguments": {}}, {"name": "ride_hailing.book", "arguments": {"pickup": "Tòa nhà Kim Cương, Nam Từ Liêm, Hà Nội", "dropoff": "Cà phê Phố Cổ, 11 Hàng Gai, Hoàn Kiếm, Hà Nội", "vehicle": "car4"}}, {"name": "reminders.create", "arguments": {"content": "mang laptop", "t
+- train_0188: 45 phút nữa nhắc chị gọi lại cho khách nhé.
+    gold: [{"name": "reminders.create", "arguments": {"content": "gọi lại cho khách", "time": "2026-11-05T13:55:00+07:00"}}]
+    pred: [{"name": "reminders.create", "arguments": {"content": "gọi lại cho khách", "time": "2026-11-05T13:19:00+07:00"}}]
+
+== f1:extra_and_missing_calls
+- train_0039: Ờ, à, nhắn qua Zalo cho Minh là tối nay ăn cơm ở nhà nhé.
+    gold: [{"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id": "chat_04", "content": "tối nay ăn cơm ở nhà nhé"}}]
+    pred: [{"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.send_message", "arguments": {"chat_id": "chat_04", "content": "tối nay cần mã nhà"}}]
+- train_0250: Đặt báo thức bảy rưỡi sáng mai giúp mình, rồi chuyển ví cho Mẹ ít tiền nha.
+    gold: [{"name": "contacts.search", "arguments": {"query": "Mẹ"}}, {"name": "alarm.create", "arguments": {"time": "2026-11-22T07:30:00+07:00"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "ewallet.transfer", "params": ["amount"]}}]
+    pred: [{"name": "alarm.create", "arguments": {"time": "2026-11-22T07:30:00+07:00"}}, {"name": "contacts.search", "arguments": {"query": "mẹ"}}, {"name": "ewallet.get_balance", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "ewallet.transfer", "params": ["amount"]}}]
+- train_0577: Em sắp về rồi, cho robot dọn phòng ngủ ngay bây giờ đi, với cài cho quạt phòng ngủ tối nào cũng tự bật lúc chín giờ nha.
+    gold: [{"name": "robot_vacuum.get_status", "arguments": {}}, {"name": "robot_vacuum.start", "arguments": {"rooms": ["phòng ngủ"]}}, {"name": "smart_home.get_status", "arguments": {}}, {"name": "home_automation.create_rule", "arguments": {"device_id": "fan_bedroom", "action": "on", "time": "21:00", "title"
+    pred: [{"name": "robot_vacuum.get_status", "arguments": {}}, {"name": "robot_vacuum.start", "arguments": {"rooms": ["phòng ngủ"]}}, {"name": "smart_home.get_status", "arguments": {}}, {"name": "home_automation.create_rule", "arguments": {"device_id": "fan_bedroom", "action": "on", "time": "21:00"}}]
+- train_0672: An bác sĩ gia đình ấy em. Ghi chú thì cứ ghi là đã gọi bác sĩ An hỏi lịch tái khám là được.
+    gold: [{"name": "phone.call", "arguments": {"contact_id": "c_01"}}, {"name": "notes.create", "arguments": {"title": "Cuộc gọi bác sĩ An", "content": "Đã gọi bác sĩ An hỏi lịch tái khám"}}]
+    pred: [{"name": "phone.call", "arguments": {"contact_id": "c_01"}}, {"name": "notes.create", "arguments": {"title": "Gọi bác sĩ gia đình", "content": "Đã gọi bác sĩ gia đình hỏi lịch khám."}}]
+- train_0729: Vậy soạn giúp em một bản nháp gửi email nhóm đó, nói là em sẽ gửi bổ sung bản scan trước thứ Sáu nha, để nháp thôi đừng 
+    gold: [{"name": "email.create_draft", "arguments": {"to": ["tuyensinh.nhom@example.test"], "subject": "Phản hồi hồ sơ đăng ký", "body": "Em sẽ gửi bổ sung bản scan căn cước trước thứ Sáu ạ."}}]
+    pred: [{"name": "email.create_draft", "arguments": {"to": ["tuyensinh.nhom@example.test"], "subject": "Bổ sung hồ sơ lớp kỹ năng", "body": "Em sẽ gửi bổ sung bản scan trước thứ Sáu nha."}}]
+- train_0747: Nhắc tôi uống thuốc theo đơn lúc ba giờ chiều ngày mười hai tháng mười nhé, xong gọi luôn số không chín không hai, không
+    gold: [{"name": "reminders.create", "arguments": {"content": "Uống thuốc theo đơn", "time": "2026-10-12T15:00:00+07:00"}}, {"name": "phone.call", "arguments": {"phone_number": "09020000270"}}]
+    pred: [{"name": "reminders.create", "arguments": {"content": "uống thuốc theo đơn lúc 3 giờ chiều ngày 12 tháng 10", "time": "2026-10-12T15:00:00+07:00"}}, {"name": "phone.call", "arguments": {"phone_number": "09020000270"}}]
+
+== state:missing_write
+- train_0174: Đặt báo thức sáu giờ sáng mai giùm tôi, rồi gọi cho Minh luôn nha.
+    gold: [{"name": "alarm.create", "arguments": {"time": "2026-11-24T06:00:00+07:00"}}, {"name": "contacts.search", "arguments": {"query": "Minh"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "phone.call", "params": ["contact_id"]}}]
+    pred: [{"name": "contacts.search", "arguments": {"query": "Minh"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "alarm.create", "params": ["time"]}}]
+- train_0491: Thế thì lấy tập 12 Thành phố xanh cho tôi nhé.
+    gold: [{"name": "podcast_radio.search", "arguments": {"query": "Thành phố xanh"}}, {"name": "podcast_radio.queue", "arguments": {"episode_id": "ep_06"}}]
+    pred: [{"name": "podcast_radio.search", "arguments": {"query": "thành phố xanh số mười hai"}}]
+- train_0693: Mai Anh nhà chị mới đổi email rồi em, sửa trong danh bạ dùm chị thành mai chấm anh mười bốn a còng example chấm test nha
+    gold: [{"name": "contacts.search", "arguments": {"query": "Mai Anh"}}, {"name": "contacts.update", "arguments": {"contact_id": "c_01", "email": "mai.anh14@example.test"}}]
+    pred: [{"name": "contacts.search", "arguments": {"query": "Mai"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "contacts.update", "params": ["contact_id"]}}]
+
+== state:extra_write
+- train_0220: Trợ lý ơi, nhắc mình gọi cho mẹ nhé.
+    gold: [{"name": "sys.ask_missing_info", "arguments": {"tool_name": "reminders.create", "params": ["time"]}}]
+    pred: [{"name": "reminders.create", "arguments": {"content": "gọi cho mẹ", "time": "2026-11-18T13:10:00+07:00"}}]
+- train_1303: Con xoá lẹ giùm cô cái nhắc đi chợ nghe.
+    gold: [{"name": "reminders.list", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "reminders.delete", "params": ["reminder_id"]}}]
+    pred: [{"name": "reminders.list", "arguments": {}}, {"name": "reminders.delete", "arguments": {"reminder_id": "rem_552"}}]
+- train_1400: Nếu tài khoản lương đủ trả cả tiền điện lẫn tiền nước thì bật autopay cho hai cái, không thì tiền nước thôi nha.
+    gold: [{"name": "bill_payment.schedule_autopay", "arguments": {"type": "water", "enabled": true}}]
+    pred: [{"name": "bill_payment.schedule_autopay", "arguments": {"type": "electricity", "enabled": false}}, {"name": "bill_payment.schedule_autopay", "arguments": {"type": "water", "enabled": true}}]
+- train_1543: Giữ giùm tôi chiếc rẻ nhất ở trạm Bến Ninh Kiều nghe em, cô Grace Nakamura mượn đạp ra chợ nổi chơi.
+    gold: [{"name": "sys.ask_missing_info", "arguments": {"tool_name": "bike_rental.reserve", "params": ["bike_id"]}}]
+    pred: [{"name": "bike_rental.reserve", "arguments": {"bike_id": "bike_4842"}}]
+- train_1651: Ví điện tử còn bao nhiêu? Dưới một triệu thì đặt báo thức tám giờ tối nhắc chị nạp, với giao Lan lau nhà nhé.
+    gold: [{"name": "ewallet.get_balance", "arguments": {}}, {"name": "household_chores.list_chores", "arguments": {}}, {"name": "household_chores.assign", "arguments": {"chore_id": "chore_303", "assignee": "Lan"}}]
+    pred: [{"name": "ewallet.get_balance", "arguments": {}}, {"name": "alarm.create", "arguments": {"time": "2026-12-03T20:00:00+07:00"}}, {"name": "household_chores.list_chores", "arguments": {}}, {"name": "household_chores.assign", "arguments": {"chore_id": "chore_303", "assignee": "Lan"}}]
+- train_1738: Cái góp ý của cô Hạnh mình nhắn Nhi hồi sáng, ghi luôn vô ghi chú feedback giùm mình nghe.
+    gold: [{"name": "notes.list", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "notes.append", "params": ["note_id"]}}]
+    pred: [{"name": "notes.create", "arguments": {"title": "Góp ý cô Hạnh", "content": "Rút ngắn phần khởi động, thêm thời gian luyện tập."}}]
+
+== f1:extra_calls
+- train_0263: Đặt báo thức năm rưỡi sáng mai, với chuyển ví cho Bố ít tiền nhé.
+    gold: [{"name": "contacts.search", "arguments": {"query": "Bố"}}, {"name": "alarm.create", "arguments": {"time": "2026-11-14T05:30:00+07:00"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "ewallet.transfer", "params": ["amount"]}}]
+    pred: [{"name": "alarm.create", "arguments": {"time": "2026-11-14T05:30:00+07:00"}}, {"name": "contacts.search", "arguments": {"query": "Bố"}}, {"name": "ewallet.get_balance", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "ewallet.transfer", "params": ["amount"]}}]
+
+== no_call_but_gold_acts
+- train_0293: Nếu mai mưa thì dời chạy bộ sáng mai muộn hai tiếng, nhắn SMS cho Minh giờ mới, không mưa thì thôi.
+    gold: [{"name": "calendar.list_events", "arguments": {}}, {"name": "calendar.update_event", "arguments": {"event_id": "evt_01", "start": "2026-11-26T10:00:00+07:00", "end": "2026-11-26T11:00:00+07:00"}}, {"name": "contacts.search", "arguments": {"query": "Minh"}}, {"name": "sms.send", "arguments": {"conta
+    pred: []
+- train_0328: Nếu mai mưa thì huỷ lịch đá bóng sáng mai rồi gọi báo cho Minh, không mưa thì thôi nhé.
+    gold: [{"name": "calendar.list_events", "arguments": {}}, {"name": "calendar.cancel_event", "arguments": {"event_id": "evt_01"}}, {"name": "contacts.search", "arguments": {"query": "Minh"}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "phone.call", "params": ["contact_id"]}}]
+    pred: []
+- train_0475: Em đọc giúp anh nhóm Zalo Dự án Mây xem lịch bàn giao chốt hôm nào, rồi thêm vào lịch của anh đúng giờ đó, đặt tên là Bà
+    gold: [{"name": "chat_ott.list_chats", "arguments": {}}, {"name": "chat_ott.read_chat", "arguments": {"chat_id": "chat_06"}}, {"name": "calendar.create_event", "arguments": {"title": "Bàn giao Dự án Mây", "start": "2026-10-02T14:00:00+07:00", "end": "2026-10-02T15:00:00+07:00"}}]
+    pred: []
+- train_0483: Vậy cho nó dọn chỗ đó luôn bây giờ đi em.
+    gold: [{"name": "robot_vacuum.start", "arguments": {"rooms": ["bếp"]}}]
+    pred: []
+- train_0603: Giờ mà trời đang mưa thì thêm giúp tôi một việc là che mấy chậu cây ngoài ban công nhé.
+    gold: [{"name": "weather.get_current", "arguments": {}}, {"name": "tasks.add", "arguments": {"title": "Che mấy chậu cây ngoài ban công"}}]
+    pred: []
+- train_0691: Cái buổi phối hợp phân công tình nguyện hôm mười bảy tôi lỡ tay hủy mất rồi, tạo lại cho tôi đúng giờ cũ nhé.
+    gold: [{"name": "calendar.list_events", "arguments": {}}, {"name": "calendar.create_event", "arguments": {"title": "Phối hợp phân công tình nguyện", "start": "2026-10-17T08:00:00+07:00", "end": "2026-10-17T09:00:00+07:00", "location": "Nhà văn hóa phường Láng Hạ"}}]
+    pred: []
+
+== f1:missing_calls
+- train_0806: Xem camera phòng khách giúp em có ai ở đó không, không có ai thì cho robot hút bụi phòng khách luôn nha.
+    gold: [{"name": "home_security.get_camera", "arguments": {"location": "phòng khách"}}, {"name": "robot_vacuum.get_status", "arguments": {}}, {"name": "robot_vacuum.start", "arguments": {"rooms": ["phòng khách"]}}]
+    pred: [{"name": "home_security.get_camera", "arguments": {"location": "phòng khách"}}, {"name": "robot_vacuum.start", "arguments": {"rooms": ["phòng khách"]}}]
+- train_1014: Em giữ giúp chị chiếc xe điện, ấy nhầm, chiếc thể thao kia nhé, nếu một lít xăng 95 giờ đắt hơn tiền thuê nó tiếng rưỡi.
+    gold: [{"name": "fuel_price.get_price", "arguments": {"type": "ron95"}}, {"name": "bike_rental.reserve", "arguments": {"bike_id": "bike_3610"}}]
+    pred: [{"name": "bike_rental.reserve", "arguments": {"bike_id": "bike_3610"}}]
+
+== ask:missing
+- train_1399: Thôi lấy vàng nhẫn đi em, chuyển tiền bằng tài khoản thanh toán cho tiệm Kim Hưng nha.
+    gold: [{"name": "gold_price.get_price", "arguments": {"type": "ring"}}, {"name": "banking.list_beneficiaries", "arguments": {}}, {"name": "sys.ask_missing_info", "arguments": {"tool_name": "banking.transfer", "params": ["beneficiary_id"]}}]
+    pred: [{"name": "banking.list_beneficiaries", "arguments": {}}, {"name": "banking.transfer", "arguments": {"from_account_id": "acc_466", "beneficiary_id": "ben_2093", "amount": 129400000}}]
+- train_1605: Bên Sunrise mới báo chuyển cọc rồi đó, em coi giùm tôi tỷ giá tiền bên đó đổi ra tiền Việt hen.
+    gold: [{"name": "sys.ask_missing_info", "arguments": {"tool_name": "exchange_rate.get_rate", "params": ["from_currency"]}}]
+    pred: [{"name": "exchange_rate.get_rate", "arguments": {"from_currency": "EUR", "to_currency": "VND"}}]
+
+== acted_on_out_of_scope
+- train_1606: Sếp kêu đọc cuốn Tuổi trẻ đáng giá bao nhiêu, em kiếm coi thư viện còn không rồi giữ cho anh lẹ.
+    gold: []
+    pred: [{"name": "library.search", "arguments": {"query": "Tội trẻ"}}]

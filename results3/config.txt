@@ -1,0 +1,4 @@
+BASE=Qwen/Qwen3-4B-Instruct-2507
+ADAPTER=ft_fit (v2)
+BEST_ASR=turbo
+GPU=NVIDIA L4
