@@ -1,4 +1,0 @@
-samples 135  score 66.91
-  act           n= 100  mean=67.63
-  ask_missing   n=  23  mean=46.52
-  out_of_scope  n=  12  mean=100.00

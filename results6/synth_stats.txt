@@ -1,3 +1,0 @@
-440 mẫu
-{'act': 351, 'ask': 47, 'oos': 42}
-[('reminders', 131), ('pantry', 46), ('recipes', 43), ('contacts', 42), ('ecommerce', 40), ('event_tickets', 40), ('grocery', 40), ('habit_tracker', 40), ('parking', 40), ('public_transit', 40), ('stocks', 40), ('train_bus_tickets', 40), ('translator', 40), ('calendar', 17), ('chat_ott', 17), ('notes', 9), ('shopping_list', 6), ('sms', 4)]

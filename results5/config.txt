@@ -1,5 +1,0 @@
-BASE=Qwen/Qwen3-4B-Instruct-2507
-LLM_EPOCHS=1
-SFT=2871
-synth_specs=0
-GPU=NVIDIA A100-SXM4-40GB

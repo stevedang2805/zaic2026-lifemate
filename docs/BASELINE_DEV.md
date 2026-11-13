@@ -1,5 +1,8 @@
 # LifeMate baseline agent (ZAIC 2026)
 
+> Tài liệu dev từ giai đoạn v1–v7. Các notebook `notebooks/zaic_v*_colab.ipynb` nhắc tới bên dưới đã xoá khỏi nhánh chính;
+> lấy lại bằng `git checkout 2a288e6 -- notebooks/`. Hệ thống hiện tại: xem `README.md` ở thư mục gốc.
+
 Bước 1: agent loop dùng **transcript gold** (bỏ qua ASR) để đo trần của phần LLM. Không chứa dữ liệu của BTC.
 
 ```

@@ -1,6 +1,0 @@
-BASE=Qwen/Qwen3-4B-Instruct-2507
-TRAIN_ALL=False
-USE_ASR=False
-SFT=2794
-synth=440
-GPU=NVIDIA A100-SXM4-40GB

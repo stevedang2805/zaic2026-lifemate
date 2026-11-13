@@ -33,7 +33,7 @@ Cell kiểm tra đầu notebook so file `VERSION` trong zip — đổi `VERSION`
 | v9 | + 320 spec viết tay (`synth_specs/llm_*`) | 39.52 / 58.31 | 47.17 |
 | v10 | **BỊ LOẠI** — spec viết dựa trên transcript public (vi phạm luật) | — | (46.62, không dùng) |
 | v11 | + 285 spec viết từ catalog (`synth_specs_claude/`) | 40.90 / 55.68 | 49.53 |
-| v12 | + 131 spec vá lỗi cụ thể (`synth_specs_c12/`) | 39.43 / 60.31 | 48.05 ✗ |
+| v12 | + 131 spec vá lỗi cụ thể (đã xoá, xem commit `2a288e6`) | 39.43 / 60.31 | 48.05 ✗ |
 | v8 | v11 + ASR **Whisper large-v3** (WER 11.47% → 10.08%), toàn bộ clip | 44.53 / 59.10 (holdout) | 51.01 |
 | **cuối** | v8 + LLM train trên **toàn bộ** train (SFT 5455) | — | **52.10** |
 
@@ -58,21 +58,20 @@ Chi tiết mọi thí nghiệm, lý do thắng/thua, số liệu: **`HANDOFF.md`
 ```
 lifemate/            code agent: prompt, agent loop + guards, backends (vLLM/HF/oracle), ASR, SFT, LoRA, synth_build, infer (Docker)
 scripts/score.py     scorer local (khớp luật chấm, 1545/1545 khi replay gold); scripts/detcheck.py so 2 lần chạy
-synth_specs/         gen_*.jsonl (440, code) + llm_*.jsonl (320, viết tay)  — dùng trong bản cuối
-synth_specs_claude/  285 spec viết từ catalog — dùng trong bản cuối
-synth_specs_c12/     131 spec vá lỗi — KHÔNG dùng (v12 thua)
-tools/synth_v9/      generator của synth_specs_claude (mỗi kịch bản là code: lời nói, state, gold)
-tools/synth_v12/     generator của synth_specs_c12
+tests/               test guards (không cần GPU)
+synth_specs/         gen_*.jsonl (440, sinh bằng code) + llm_*.jsonl (320, viết tay)
+synth_specs_claude/  285 spec viết từ catalog
+tools/synth_v9/      generator của synth_specs_claude (mỗi kịch bản là code: lời nói, state, gold) — dùng để viết thêm spec
 splits/              val_unseen (193, 6 app giữ lại) / val_seen (135) / train_fit (957)
-colab/               notebook Colab: zaic_final_llm / zaic_final_asr (tái hiện bản cuối), v2…v12 (lịch sử)
+colab/               zaic_final_llm_colab (LLM cuối), zaic_final_asr_colab (ASR cuối), zaic_v11_colab (LLM trên train_fit, đo được val)
 docker/              Dockerfile (vllm/vllm-openai:v0.33.0), build_and_test.sh (3 PASS: đủ dòng, schema, tất định)
 VAST_GUIDE.md        dựng + test + nộp Docker trên Vast.ai từng bước (Bước 5b cho large-v3)
 HANDOFF.md           toàn bộ lịch sử, quyết định, số liệu
-docs/BASELINE_DEV.md hướng dẫn chạy dev (oracle test, baseline, guards)
-results*/            log/score của các bản cũ (v1–v7)
+docs/BASELINE_DEV.md hướng dẫn chạy dev (oracle test, baseline, guards) và ghi chép v1–v7
 ```
 
-Lưu ý: `colab/zaic_v9_colab.ipynb` **không** phải notebook đã cho 47.17 (bản đó chạy từ phiên khác); dữ liệu của v9 thật là `synth_specs/llm_*.jsonl`.
+Lịch sử (notebook v2–v12, log `results1–7`, dữ liệu v12 `synth_specs_c12`, các hướng dẫn cũ) đã xoá khỏi nhánh chính cho gọn,
+vẫn lấy lại được từ commit đầu: `git checkout 2a288e6 -- <đường dẫn>`.
 
 ## Kiểm tra nhanh không cần GPU
 

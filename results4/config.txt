@@ -1,3 +1,0 @@
-LLM=v2 adapter ft_fit
-ASR=openai/whisper-large-v3-turbo fine-tuned 3 ep
-GPU=NVIDIA L4

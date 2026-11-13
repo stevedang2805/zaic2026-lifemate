@@ -1,6 +1,0 @@
-BASE=Qwen/Qwen3-4B-Instruct-2507
-TRAIN_ALL=False
-USE_ASR=False
-SFT=2710
-synth=440
-GPU=NVIDIA L4
