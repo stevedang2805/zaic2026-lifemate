@@ -322,3 +322,11 @@ Nếu public > 52.10: Docker thêm `"--asr-beams", "<B>"` vào `CMD`, và đo l�
 **Kết quả (14/11):** WER val (asr_v8_large_holdout, L4): greedy 10.05%, beam 3 **9.58%** (ASR chậm 2.7×), beam 5 lỗi (nghi OOM, batch 16 trên L4).
 Public với hệ thống cuối + beam 3: **51.28 < 52.10 (greedy)** → **giữ greedy**. Lần thứ hai val cải thiện nhưng public không (như v8 holdout):
 lỗi ASR còn lại nằm ở từ vựng app lạ, beam không sửa được. Tuỳ chọn `--beams` giữ trong code, mặc định 1.
+
+## 17. Model soup (14/11, không train, L4)
+
+`lifemate/soup.py`: W = W_base + Σ wᵢ·(αᵢ/rᵢ)·Bᵢ·Aᵢ — trung bình chính xác trên delta LoRA (không trung bình A, B riêng), từng module một
+(vừa GPU 24GB). Đã kiểm trên Qwen3 tí hon: 1 adapter khớp `merge_and_unload` của peft, 2 adapter = trung bình 2 delta (sai số bf16 ~4e-4).
+Output là model đã merge, dùng y như `lifemate.merge` → Docker chỉ thay bước merge bằng `lifemate.soup`.
+Notebook `colab/zaic_soup_colab.ipynb` (L4, ~2 giờ): A = ½ v11_all + ½ v11; B = ⅓ v11_all + ⅓ v11 + ⅓ v12; ASR `asr_v8_large_all` greedy.
+Không dùng `ft_v10_adapter` (bị loại). Val không dùng để chọn được (v11_all đã thấy val) → public là trọng tài; đổi Docker khi ≥ 53.1.
