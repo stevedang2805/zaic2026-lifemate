@@ -49,7 +49,7 @@ Chi tiết mọi thí nghiệm, lý do thắng/thua, số liệu: **`HANDOFF.md`
 
 ## Hướng làm tiếp (xếp theo kỳ vọng)
 
-0. **Beam search cho Whisper** (không train, L4): `colab/zaic_beam_colab.ipynb` — xem `HANDOFF.md` mục 16.
+0. ~~Beam search cho Whisper~~ — đã thử 14/11: WER val 10.05 → 9.58% nhưng public 51.28 < 52.10, **không dùng** (`HANDOFF.md` mục 16).
 1. **Thêm ~300 spec phủ rộng** cho các app/tool đang ít mẫu, cùng kiểu `synth_specs_claude/` (generator: `tools/synth_v9/`). Kiểm tra bằng simulator: `python -m lifemate.synth_build --root DATA --tools-from public_test --specs "<glob>" --split synth_x` (phải 0 reject). Train bằng `colab/zaic_final_llm_colab.ipynb` sau khi thêm glob.
 2. **Audio TTS** cho từ vựng app mới (tên hàng, ga tàu, mã cổ phiếu) để fine-tune ASR.
 3. **Cho LLM lập kế hoạch/suy nghĩ ngắn trước khi gọi tool** (phải giữ ≤ 30 s/mẫu trên A30).

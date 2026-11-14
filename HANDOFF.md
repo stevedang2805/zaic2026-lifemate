@@ -318,3 +318,7 @@ Bản cuối giải mã Whisper **greedy**. Đã thêm `--beams` (`lifemate/asr.
 greedy nên mọi bản cũ tái hiện y nguyên. Notebook `colab/zaic_beam_colab.ipynb` (L4): đo WER val với `asr_v8_large_holdout`
 ở beam 1/3/5 (greedy = 10.08%), nếu beam tốt nhất giảm ≥ 0.3 điểm WER thì chạy public với hệ thống cuối + beam đó.
 Nếu public > 52.10: Docker thêm `"--asr-beams", "<B>"` vào `CMD`, và đo lại max giây/mẫu (beam chậm hơn greedy).
+
+**Kết quả (14/11):** WER val (asr_v8_large_holdout, L4): greedy 10.05%, beam 3 **9.58%** (ASR chậm 2.7×), beam 5 lỗi (nghi OOM, batch 16 trên L4).
+Public với hệ thống cuối + beam 3: **51.28 < 52.10 (greedy)** → **giữ greedy**. Lần thứ hai val cải thiện nhưng public không (như v8 holdout):
+lỗi ASR còn lại nằm ở từ vựng app lạ, beam không sửa được. Tuỳ chọn `--beams` giữ trong code, mặc định 1.
