@@ -330,3 +330,7 @@ lỗi ASR còn lại nằm ở từ vựng app lạ, beam không sửa được.
 Output là model đã merge, dùng y như `lifemate.merge` → Docker chỉ thay bước merge bằng `lifemate.soup`.
 Notebook `colab/zaic_soup_colab.ipynb` (L4, ~2 giờ): A = ½ v11_all + ½ v11; B = ⅓ v11_all + ⅓ v11 + ⅓ v12; ASR `asr_v8_large_all` greedy.
 Không dùng `ft_v10_adapter` (bị loại). Val không dùng để chọn được (v11_all đã thấy val) → public là trọng tài; đổi Docker khi ≥ 53.1.
+
+**Kết quả (14/11):** soup A (½ v11_all + ½ v11) **51.62**, soup B (⅓ v11_all + ⅓ v11 + ⅓ v12) **50.75** — đều < 52.10 (v11_all một mình).
+Trộn thêm bản thấy ít dữ liệu hơn (không có val) kéo bản tốt nhất xuống; soup chỉ có ích khi các bản ngang sức. **Không dùng.**
+Tổng kết thử nghiệm sau 52.10: c12 (−1.5 trên nền v11), beam 3 (−0.8), soup (−0.5 / −1.4) → **bản cuối giữ nguyên `ft_v11_all_adapter` + `asr_v8_large_all`, greedy.**
